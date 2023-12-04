@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "employee")
-public class employee {
+public class Employee {
 	
 	
 	@Id
@@ -52,12 +52,12 @@ public class employee {
 	@Column(name = "sick_leave")
 	private int sickLeave;
 
-	public employee() {
+	public Employee() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public employee(String id, String department, String name, String password, String email, String jobPosition,
+	public Employee(String id, String department, String name, String password, String email, String jobPosition,
 			LocalDate birthDate, LocalDate arrivalDate, LocalDate resignationDate, String quitReason, boolean active,
 			int annualLeave, int sickLeave) {
 		super();

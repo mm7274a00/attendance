@@ -6,25 +6,25 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "departments")
-public class departments {
+@Table(name = "job_position")
+public class JobPosition {
 	
 	@Id
 	@Column(name = "id")
 	private String id;
 	
-	@Column(name = "name")
-	private String name;
+	@Column(name = "title")
+	private String title;
 
-	public departments() {
+	public JobPosition() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public departments(String id, String name) {
+	public JobPosition(String id, String title) {
 		super();
 		this.id = id;
-		this.name = name;
+		this.title = title;
 	}
 
 	public String getId() {
@@ -35,12 +35,12 @@ public class departments {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setTitle(String title) {
+		this.title = title;
 	}
-
+	
 }

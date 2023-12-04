@@ -7,7 +7,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "auth_code")
-public class authCode {
+public class AuthCode {
 	
 	@Id
 	@Column(name = "employee_id")
@@ -19,12 +19,12 @@ public class authCode {
 	@Column(name = "auth_datetime")
 	private String authDatetime;
 
-	public authCode() {
+	public AuthCode() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public authCode(String employeeId, String authCode, String authDatetime) {
+	public AuthCode(String employeeId, String authCode, String authDatetime) {
 		super();
 		this.employeeId = employeeId;
 		this.authCode = authCode;
