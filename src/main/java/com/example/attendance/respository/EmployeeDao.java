@@ -8,4 +8,6 @@ import com.example.attendance.entity.Employee;
 @Repository
 public interface EmployeeDao extends JpaRepository<Employee,String>{
 
+	boolean exitstsById(String id);
+
 }

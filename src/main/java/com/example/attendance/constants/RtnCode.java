@@ -5,6 +5,7 @@ public enum RtnCode {
 	SUCCESSFUL(200,"Successful!"), //
 	PARAM_ERROR(400,"Param error!"), //
 	ID_HAS_EXISTED(400,"Id has existed!"), //
+	DEPARTMENT_NOT_FOUND(404,"Department not found!"), //
 	;
 			
 	private int code;

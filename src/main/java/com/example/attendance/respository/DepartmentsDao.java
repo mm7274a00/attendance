@@ -11,5 +11,7 @@ import com.example.attendance.entity.Departments;
 public interface DepartmentsDao extends JpaRepository<Departments,String>{
 	
 	public boolean existsByIdIn(List<String> ids);
+	
+	public boolean existsByName(String name);
 
 }

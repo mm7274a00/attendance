@@ -10,6 +10,7 @@ import org.springframework.util.Assert;
 import com.example.attendance.entity.Departments;
 import com.example.attendance.service.ifs.DepartmentsService;
 import com.example.attendance.vo.DepartmentsCreateReq;
+import com.example.attendance.vo.DepartmentsCreateRes;
 import com.example.attendance.vo.EmployeeCreateRes;
 
 
@@ -24,7 +25,7 @@ public class DepartmentsTests {
 	public void adminDepTest() {
 		Departments dep = new Departments("99","ADMIN");
 		DepartmentsCreateReq req = new DepartmentsCreateReq(Arrays.asList(dep));
-		EmployeeCreateRes res = service.create(req);
+		DepartmentsCreateRes res = service.create(req);
 		Assert.isTrue(res.getRtnCode().getCode() == 200,"Departments create error!");
 	}
 

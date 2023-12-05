@@ -14,7 +14,7 @@ import com.example.attendance.entity.Departments;
 import com.example.attendance.respository.DepartmentsDao;
 import com.example.attendance.service.ifs.DepartmentsService;
 import com.example.attendance.vo.DepartmentsCreateReq;
-import com.example.attendance.vo.EmployeeCreateRes;
+import com.example.attendance.vo.DepartmentsCreateRes;
 
 @EnableScheduling
 @Service
@@ -24,23 +24,23 @@ public class DepartmentsServiceImpl implements DepartmentsService{
 	private DepartmentsDao dao;
 	
 	@Override
-	public EmployeeCreateRes create(DepartmentsCreateReq req) {
+	public DepartmentsCreateRes create(DepartmentsCreateReq req) {
 		if(CollectionUtils.isEmpty(req.getDepList())) {
-			return new EmployeeCreateRes(RtnCode.PARAM_ERROR);
+			return new DepartmentsCreateRes(RtnCode.PARAM_ERROR);
 			
 		}
 		List<String> idList = new ArrayList<>();
 		for(Departments item : req.getDepList()) {
 			if(!StringUtils.hasText(item.getId()) || !StringUtils.hasText(item.getName())){
-				return new EmployeeCreateRes(RtnCode.PARAM_ERROR);	
+				return new DepartmentsCreateRes(RtnCode.PARAM_ERROR);	
 			}
 			idList.add(item.getId());
 		}
 		if(dao.existsByIdIn(idList)) {
-			return new EmployeeCreateRes(RtnCode.ID_HAS_EXISTED);
+			return new DepartmentsCreateRes(RtnCode.ID_HAS_EXISTED);
 		}
 		dao.saveAll(req.getDepList());
-		return new EmployeeCreateRes(RtnCode.SUCCESSFUL);
+		return new DepartmentsCreateRes(RtnCode.SUCCESSFUL);
 		
 	}
 
