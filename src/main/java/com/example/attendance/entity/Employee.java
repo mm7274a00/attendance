@@ -50,7 +50,7 @@ public class Employee {
 	private int annualLeave;
 	
 	@Column(name = "sick_leave")
-	private int sickLeave;
+	private int sickLeave = 30;
 
 	public Employee() {
 		super();
