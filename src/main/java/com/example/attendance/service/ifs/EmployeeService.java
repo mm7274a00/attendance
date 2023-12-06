@@ -11,5 +11,7 @@ public interface EmployeeService {
 	public BasicRes create(EmployeeCreateReq Req);
 	
 	public BasicRes login(String id, String pwd, HttpSession session);
+	
+	public BasicRes changePassword(String id, String oldPwd, String newPwd);
 
 }

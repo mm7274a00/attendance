@@ -8,6 +8,11 @@ public enum RtnCode {
 	DEPARTMENT_NOT_FOUND(404,"Department not found!"), //
 	ID_NOT_FOUND(404,"Id not found!"), //
 	PASSWORD_ERROR(400,"Password error!"), //
+	EMPLOYEE_CREATE_ERROR(400,"Employee create error!"), //
+	PLEASE_LOGIN_FIRST(400,"Please login first!"), //
+	UNAUTHORIZATED(401,"Unauthorizationed!"), //
+	CHANGE_PASSWORD_ERROR(400,"Change password error!"), //
+	OLD_PASSWORD_AND_NEW_PASSWORD_ARE_IDENTICAL(400,"Old password and new password are identical!")
 	;
 			
 	private int code;

@@ -42,7 +42,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 				|| req.getArrivalDate() == null || req.getBirthDate() == null) {
 			return new BasicRes(RtnCode.PARAM_ERROR);
 		}
-		if(dao.exitstsById(req.getId())) {
+		if(dao.existsById(req.getId())) {
 			return new BasicRes(RtnCode.ID_HAS_EXISTED);
 		}
 		//	check department_name
@@ -50,12 +50,15 @@ public class EmployeeServiceImpl implements EmployeeService{
 			return new BasicRes(RtnCode.DEPARTMENT_NOT_FOUND);
 		}
 		req.setPwd(encoder.encode(req.getPwd()));
-		dao.save((Employee)req);
+		try {
+			dao.save((Employee)req);
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+			return new BasicRes(RtnCode.EMPLOYEE_CREATE_ERROR);
+		}
 		return new BasicRes(RtnCode.SUCCESSFUL);
-	
 	}
 	
-	@Cache
 	@Override 
 	public BasicRes login(String id, String pwd, HttpSession session) {
 		if(!StringUtils.hasText(id) || !StringUtils.hasText(pwd)) {
@@ -70,7 +73,36 @@ public class EmployeeServiceImpl implements EmployeeService{
 		if(!encoder.matches(pwd, employee.getPwd())) {
 			return new BasicRes(RtnCode.PASSWORD_ERROR);
 		}
-		session.setAttribute(pwd, employee);
+		session.setAttribute("id", id);
+		session.setMaxInactiveInterval(3000);
+		logger.info("loging successful!");
 		return new BasicRes(RtnCode.SUCCESSFUL);
 	}
-}
+	
+	@Override
+	public BasicRes changePassword(String id, String oldPwd, String newPwd) {
+		if(!StringUtils.hasText(id) || !StringUtils.hasText(oldPwd) || !StringUtils.hasText(newPwd)) {
+			return new BasicRes(RtnCode.PARAM_ERROR);
+		}
+		if(oldPwd.equals(newPwd)) {
+			return new BasicRes(RtnCode.OLD_PASSWORD_AND_NEW_PASSWORD_ARE_IDENTICAL);
+		}
+		Optional<Employee>op = dao.findById(id);
+		if(op.isEmpty()) {
+			return new BasicRes(RtnCode.ID_NOT_FOUND);
+		}
+		Employee employee = op.get();
+		if(!encoder.matches(oldPwd, employee.getPwd())) {
+			return new BasicRes(RtnCode.PASSWORD_ERROR);
+		}
+		employee.setPwd(encoder.encode(newPwd));
+		try {
+			dao.save(employee);
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+			return new BasicRes(RtnCode.EMPLOYEE_CREATE_ERROR);
+		}
+		return new BasicRes(RtnCode.SUCCESSFUL);
+	}
+	
+}//

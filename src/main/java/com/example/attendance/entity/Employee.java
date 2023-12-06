@@ -98,11 +98,11 @@ public class Employee {
 		this.id = id;
 	}
 
-	public String getDepartment() {
+	public String getDepartments() {
 		return department;
 	}
 
-	public void setDepartment(String department) {
+	public void setDepartments(String department) {
 		this.department = department;
 	}
 
