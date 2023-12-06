@@ -12,7 +12,10 @@ public enum RtnCode {
 	PLEASE_LOGIN_FIRST(400,"Please login first!"), //
 	UNAUTHORIZATED(401,"Unauthorizationed!"), //
 	CHANGE_PASSWORD_ERROR(400,"Change password error!"), //
-	OLD_PASSWORD_AND_NEW_PASSWORD_ARE_IDENTICAL(400,"Old password and new password are identical!")
+	OLD_PASSWORD_AND_NEW_PASSWORD_ARE_IDENTICAL(400,"Old password and new password are identical!"),//
+	FORGOT_PASSWORD_ERROR(400,"Forgot password error!"), //
+	AUTH_CODE_NOT_MATCHED(400,"Auth code not matched!"), //
+	AUTH_CODE_EXPIRED(400,"Auth code expired!"), //
 	;
 			
 	private int code;

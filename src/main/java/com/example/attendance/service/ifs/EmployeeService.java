@@ -13,5 +13,9 @@ public interface EmployeeService {
 	public BasicRes login(String id, String pwd, HttpSession session);
 	
 	public BasicRes changePassword(String id, String oldPwd, String newPwd);
+	
+	public BasicRes forgotPassword(String id, String email);
+	
+	public BasicRes changePasswordByAuthCode(String id, String authCode, String newPwd);
 
 }

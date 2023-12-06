@@ -1,5 +1,7 @@
 package com.example.attendance.entity;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -17,14 +19,14 @@ public class AuthCode {
 	private String authCode;
 	
 	@Column(name = "auth_datetime")
-	private String authDatetime;
+	private LocalDateTime authDatetime;
 
 	public AuthCode() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public AuthCode(String employeeId, String authCode, String authDatetime) {
+	public AuthCode(String employeeId, String authCode, LocalDateTime authDatetime) {
 		super();
 		this.employeeId = employeeId;
 		this.authCode = authCode;
@@ -47,11 +49,11 @@ public class AuthCode {
 		this.authCode = authCode;
 	}
 
-	public String getAuthDatetime() {
+	public LocalDateTime getAuthDatetime() {
 		return authDatetime;
 	}
 
-	public void setAuthDatetime(String authDatetime) {
+	public void setAuthDatetime(LocalDateTime authDatetime) {
 		this.authDatetime = authDatetime;
 	}
 

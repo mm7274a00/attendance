@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.attendance.constants.RtnCode;
 import com.example.attendance.service.ifs.EmployeeService;
 import com.example.attendance.vo.BasicRes;
+import com.example.attendance.vo.ChangePasswordReq;
 import com.example.attendance.vo.EmployeeCreateReq;
+import com.example.attendance.vo.ForgotPassswordReq;
 
 @RestController
 public class EmployeeController {
@@ -43,7 +45,6 @@ public class EmployeeController {
 	public BasicRes logout(HttpSession session) {
 		session.invalidate();
 		return new BasicRes(RtnCode.SUCCESSFUL);
-
 	}
 	
 	@PostMapping(value = "api/attendance/employee/create")
@@ -57,4 +58,22 @@ public class EmployeeController {
 		}
 		return service.create(req);
 	}
-}
+	
+	@PostMapping(value = "api/attendance/employee/change_password")
+	public BasicRes changePassword(@RequestBody ChangePasswordReq req, HttpSession session) {
+		if(session.getAttribute(req.getId()) == null) {	
+			return new BasicRes(RtnCode.PLEASE_LOGIN_FIRST);
+		}
+		return service.changePassword(req.getId(), req.getOldPwd(), req.getNewPwd());
+	}
+	
+	@PostMapping(value = "api/attendance/employee/forgot_password")
+	public BasicRes forgotPassword(@RequestBody ForgotPassswordReq req) {
+		return service.forgotPassword(req.getId(), req.getEmail());
+	}
+	
+	@PostMapping(value = "api/attendance/employee/change_password_by_auth_code")
+	public BasicRes changePasswordByAuthCode(@RequestBody ChangePasswordReq req) {
+		return service.changePasswordByAuthCode(req.getId(), req.getAuthCode(), req.getNewPwd());
+	}
+}//

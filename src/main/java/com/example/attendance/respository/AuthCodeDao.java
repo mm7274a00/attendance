@@ -8,4 +8,5 @@ import com.example.attendance.entity.AuthCode;
 @Repository
 public interface AuthCodeDao extends JpaRepository<AuthCode,String>{
 
+
 }
