@@ -11,7 +11,7 @@ import com.example.attendance.entity.Departments;
 import com.example.attendance.service.ifs.DepartmentsService;
 import com.example.attendance.vo.DepartmentsCreateReq;
 import com.example.attendance.vo.DepartmentsCreateRes;
-import com.example.attendance.vo.EmployeeCreateRes;
+import com.example.attendance.vo.BasicRes;
 
 
 @SpringBootTest

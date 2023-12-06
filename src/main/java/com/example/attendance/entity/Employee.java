@@ -23,7 +23,7 @@ public class Employee {
 	private String name;
 	
 	@Column(name = "password")
-	private String password;
+	private String pwd;
 	
 	@Column(name = "email")
 	private String email;
@@ -52,19 +52,14 @@ public class Employee {
 	@Column(name = "sick_leave")
 	private int sickLeave = 30;
 
-	public Employee() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Employee(String id, String department, String name, String password, String email, String jobPosition,
+	public Employee(String id, String department, String name, String pwd, String email, String jobPosition,
 			LocalDate birthDate, LocalDate arrivalDate, LocalDate resignationDate, String quitReason, boolean active,
 			int annualLeave, int sickLeave) {
 		super();
 		this.id = id;
 		this.department = department;
 		this.name = name;
-		this.password = password;
+		this.pwd = pwd;
 		this.email = email;
 		this.jobPosition = jobPosition;
 		this.birthDate = birthDate;
@@ -74,6 +69,25 @@ public class Employee {
 		this.active = active;
 		this.annualLeave = annualLeave;
 		this.sickLeave = sickLeave;
+	}
+	
+	public Employee(String id, String department, String name, String pwd, String email, boolean active, String jobPosition,
+			LocalDate birthDate, LocalDate arrivalDate) {
+		super();
+		this.id = id;
+		this.department = department;
+		this.name = name;
+		this.pwd = pwd;
+		this.email = email;
+		this.active = active;
+		this.jobPosition = jobPosition;
+		this.birthDate = birthDate;
+		this.arrivalDate = arrivalDate;
+	}
+
+	public Employee() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public String getId() {
@@ -100,12 +114,12 @@ public class Employee {
 		this.name = name;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getPwd() {
+		return pwd;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
 
 	public String getEmail() {

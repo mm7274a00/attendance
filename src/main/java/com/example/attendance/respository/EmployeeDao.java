@@ -10,4 +10,6 @@ public interface EmployeeDao extends JpaRepository<Employee,String>{
 
 	boolean exitstsById(String id);
 
+	Employee save(Employee employee);
+
 }
