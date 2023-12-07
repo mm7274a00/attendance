@@ -30,6 +30,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	// spring security
 	implementation 'org.springframework.boot:spring-boot-starter-security'
+	//Hot Deployment
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
