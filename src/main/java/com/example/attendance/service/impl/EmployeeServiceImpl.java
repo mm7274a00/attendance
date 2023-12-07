@@ -1,5 +1,6 @@
 package com.example.attendance.service.impl;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -86,6 +87,9 @@ public class EmployeeServiceImpl implements EmployeeService{
 		if(!encoder.matches(pwd, employee.getPwd())) {
 			return new BasicRes(RtnCode.PASSWORD_ERROR);
 		}
+		if(!employee.isActive()) {
+			return new BasicRes(RtnCode.ACCOUNT_DEACTIVATE);
+		}
 		session.setAttribute("id", id);
 		session.setMaxInactiveInterval(3000);
 		logger.info("loging successful!");
@@ -118,7 +122,6 @@ public class EmployeeServiceImpl implements EmployeeService{
 		return new BasicRes(RtnCode.SUCCESSFUL);
 	}
 
-	
 	@Override
 	public BasicRes forgotPassword(String id, String email) {
 		if(!StringUtils.hasText(id) && !StringUtils.hasText(email)) {
@@ -178,6 +181,89 @@ public class EmployeeServiceImpl implements EmployeeService{
 		}catch(Exception e) {
 			logger.error(e.getMessage());
 			return new BasicRes(RtnCode.CHANGE_PASSWORD_ERROR);
+		}
+		return new BasicRes(RtnCode.SUCCESSFUL);
+	}
+
+	@Override
+	public BasicRes activate(String executorId, String emplyeeId) {
+		if(!StringUtils.hasText(executorId) || !StringUtils.hasText(emplyeeId)
+				|| executorId.equals(emplyeeId)){
+			return new BasicRes(RtnCode.PARAM_ERROR);
+		}
+		Optional<Employee> op = dao.findById(executorId);
+		if(op.isEmpty()){
+			return new BasicRes(RtnCode.ID_NOT_FOUND);
+		}
+		Employee executor = op.get();
+		if(!executor.getDepartments().equalsIgnoreCase("ADMIN")
+				|| !executor.getDepartments().equalsIgnoreCase("HR")){
+			return new BasicRes(RtnCode.UNAUTHORIZATED);
+		}
+		if(dao.updateActive(emplyeeId, true) != 1) {
+			return new BasicRes(RtnCode.UPDATE_FAILED);
+		}
+		return new BasicRes(RtnCode.SUCCESSFUL);
+	}
+
+	@Override
+	public BasicRes deactivate(String executorId, String emplyeeId) {
+		if(!StringUtils.hasText(executorId) || !StringUtils.hasText(emplyeeId)
+				|| executorId.equals(emplyeeId)){
+			return new BasicRes(RtnCode.PARAM_ERROR);
+		}
+		Optional<Employee> op = dao.findById(executorId);
+		if(op.isEmpty()){
+			return new BasicRes(RtnCode.ID_NOT_FOUND);
+		}
+		Employee executor = op.get();
+		if(!executor.getDepartments().equalsIgnoreCase("ADMIN")
+				|| !executor.getDepartments().equalsIgnoreCase("HR")){
+			return new BasicRes(RtnCode.UNAUTHORIZATED);
+		}
+		if(dao.updateActive(emplyeeId, false) != 1) {
+			return new BasicRes(RtnCode.UPDATE_FAILED);
+		}
+		return new BasicRes(RtnCode.SUCCESSFUL);
+	}
+
+	@Override
+	public BasicRes updateActivate(String executorId, String emplyeeId, boolean isActive) {
+		if(!StringUtils.hasText(executorId) || !StringUtils.hasText(emplyeeId)
+				|| executorId.equals(emplyeeId)){
+			return new BasicRes(RtnCode.PARAM_ERROR);
+		}
+		// 不用判斷是否為空，因為此方法必須是 login 後才能使用、在 login 方法已有判斷
+		Employee executor = dao.findById(executorId).get();
+		if(!executor.getDepartments().equalsIgnoreCase("ADMIN")
+				|| !executor.getDepartments().equalsIgnoreCase("HR")){
+			return new BasicRes(RtnCode.UNAUTHORIZATED);
+		}
+		if(dao.updateActive(emplyeeId, isActive) != 1) {
+			return new BasicRes(RtnCode.UPDATE_FAILED);
+		}
+		return new BasicRes(RtnCode.SUCCESSFUL);
+	}
+
+	@Override
+	public BasicRes resign(String executorId) {
+		if(!StringUtils.hasText(executorId) || !StringUtils.hasText(executorId)
+				|| executorId.equals(executorId)){
+			return new BasicRes(RtnCode.PARAM_ERROR);
+		}
+		// 不用判斷是否為空，因為此方法必須是 login 後才能使用、在 login 方法已有判斷
+		Employee executor = dao.findById(executorId).get();
+		if(!executor.getDepartments().equalsIgnoreCase("HR")){
+			return new BasicRes(RtnCode.UNAUTHORIZATED);
+		}
+		Employee employee = dao.findById(executorId).get();
+		employee.setResignationDate(LocalDate.now().plusMonths(1));
+		employee.setQuitReason("離職原因");
+		try {
+			dao.save(employee);
+		}catch(Exception e){
+			logger.error(e.getMessage());
+			return new BasicRes(RtnCode.UPDATE_FAILED);
 		}
 		return new BasicRes(RtnCode.SUCCESSFUL);
 	}

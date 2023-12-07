@@ -16,6 +16,8 @@ public enum RtnCode {
 	FORGOT_PASSWORD_ERROR(400,"Forgot password error!"), //
 	AUTH_CODE_NOT_MATCHED(400,"Auth code not matched!"), //
 	AUTH_CODE_EXPIRED(400,"Auth code expired!"), //
+	UPDATE_FAILED(400,"Update failed!"),//
+	ACCOUNT_DEACTIVATE(400,"Account deactivate!"),//
 	;
 			
 	private int code;

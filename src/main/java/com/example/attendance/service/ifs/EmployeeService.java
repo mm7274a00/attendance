@@ -17,5 +17,13 @@ public interface EmployeeService {
 	public BasicRes forgotPassword(String id, String email);
 	
 	public BasicRes changePasswordByAuthCode(String id, String authCode, String newPwd);
+	
+	public BasicRes activate(String executorId, String emplyeeId);
 
+	public BasicRes deactivate(String executorId, String emplyeeId);
+	
+	// 同時可達到 activate 跟 deactivate 的效用
+	public BasicRes updateActivate(String executorId, String emplyeeId, boolean isActive);
+	
+	public BasicRes resign(String executorId);
 }
