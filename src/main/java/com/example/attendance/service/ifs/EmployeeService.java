@@ -34,4 +34,6 @@ public interface EmployeeService {
 	public BasicRes updateInfo(String executorId, Employee employee);
 	
 	public EmployeeRes findByEmployeeId(String employeeId);
+	
+	public EmployeeRes findStaffInfo(String callerId, String targetId);
 }

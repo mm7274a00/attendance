@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import com.example.attendance.constants.JobPosition;
 import com.example.attendance.constants.RtnCode;
 import com.example.attendance.entity.AuthCode;
 import com.example.attendance.entity.Employee;
@@ -314,6 +315,31 @@ public class EmployeeServiceImpl implements EmployeeService{
 	public EmployeeRes findByEmployeeId(String employeeId) {
 		// 不用判斷 executorId是否為空，因為此方法必須是 login 後才能使用、在 login 方法已有判斷
 		return new EmployeeRes(RtnCode.SUCCESSFUL, dao.findById(employeeId).get());
+	}
+
+	
+	
+	
+	@Override
+	public EmployeeRes findStaffInfo(String callerId, String targetId) {
+		// 不用判斷 callerId是否為空，因為此方法必須是 login 後才能使用、在 login 方法已有判斷
+		if(StringUtils.hasText(targetId)) {
+			return new EmployeeRes(RtnCode.PARAM_ERROR, null);
+		}
+		Optional<Employee> op = dao.findById(callerId);
+		if(op.isEmpty()) {
+			return new EmployeeRes(RtnCode.ID_NOT_FOUND, null);
+		}
+		Employee targetInfo = op.get();
+		Employee callerInfo = dao.findById(callerId).get();
+		String callerDepartment = callerInfo.getDepartments();
+		//1. 同部門且caller 是單位主管 2. caller 是 HR 部門
+		if(!callerDepartment.equals(targetInfo.getDepartments())
+//////////				&& JobPosition.hasReviewPermission
+				|| callerDepartment.equalsIgnoreCase("HR")) {
+			return new EmployeeRes(RtnCode.SUCCESSFUL, targetInfo);
+		}
+		return new EmployeeRes(RtnCode.UNAUTHORIZATED, null);
 	}
 
 }//
