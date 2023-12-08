@@ -19,6 +19,16 @@ public enum RtnCode {
 	UPDATE_FAILED(400,"Update failed!"),//
 	UPDATE_ERROR(400,"Update error!"),//
 	ACCOUNT_DEACTIVATE(400,"Account deactivate!"),//
+	LEAVE_TYPE_ERROR(400,"LeaveType error!"),//
+	LEAVE_APPLIED_DATETIME_ERROR(400,"Leave appiled datetime error!"),//
+	LEAVE_REASON_CANNOT_BE_EMPTY(400,"Leave reason cannot be empty!"),//
+	LEAVE_REVIEWER_ID_CANNOT_BE_EMPTY(400,"Leave reviewer id cannot be empty!"),//
+	LEAVE_REVIEWER_ID_NOT_FOUND(404,"Leave reviewer id not found!"), //
+	PERMISSION_DENIED(403, "Permission denied!"),//
+	LEAVE_APPLICATION_ERROR(400,"Leave appilcation error!"),//
+	LEAVE_APPLICATION_NOT_FOUND(400,"Leave appilcation not found!"),//
+
+
 	;
 			
 	private int code;

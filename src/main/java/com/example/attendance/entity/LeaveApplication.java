@@ -18,6 +18,9 @@ public class LeaveApplication {
 	@Column(name = "serial_no")
 	private int serialNo;
 	
+	@Column(name = "application_no")
+	private String applicationlNo;
+	
 	@Column(name = "employee_id")
 	private String employeeId;
 	
@@ -59,14 +62,14 @@ public class LeaveApplication {
 
 	public LeaveApplication() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public LeaveApplication(String employeeId, String employeeDepartment, String leaveType,
+	public LeaveApplication(String applicationNo, String employeeId, String employeeDepartment, String leaveType,
 			LocalDateTime leaveStartDatetime, LocalDateTime leaveEndDatetime, int totalHours, String leaveReason,
 			String reviewerId, LocalDateTime reviewerDatetime, String reviewerStatus, String rejectReason,
 			LocalDateTime appliedDatetime, LocalDateTime updateDatetime) {
 		super();
+		this.applicationlNo = applicationNo;
 		this.employeeId = employeeId;
 		this.employeeDepartment = employeeDepartment;
 		this.leaveType = leaveType;
@@ -82,6 +85,25 @@ public class LeaveApplication {
 		this.updateDatetime = updateDatetime;
 	}
 
+	public LeaveApplication(LeaveApplication application) {
+		super();
+		this.applicationlNo = application.getApplicationlNo();
+		this.employeeId = application.getEmployeeId();
+		this.employeeDepartment = application.getEmployeeDepartment();
+		this.leaveType = application.getLeaveType();
+		this.leaveStartDatetime = application.getLeaveStartDatetime();
+		this.leaveEndDatetime = application.getLeaveEndDatetime();
+		this.totalHours = application.getTotalHours();
+		this.leaveReason = application.getLeaveReason();
+		this.reviewerId = application.getReviewerId();
+		this.reviewerDatetime = application.getReviewerDatetime();
+		this.reviewerStatus = application.getReviewerStatus();
+		this.rejectReason = application.getRejectReason();
+		this.appliedDatetime = application.getAppliedDatetime();
+		this.updateDatetime = application.getUpdateDatetime();
+	}
+
+	
 	public int getSerialNo() {
 		return serialNo;
 	}
@@ -192,6 +214,14 @@ public class LeaveApplication {
 
 	public void setUpdateDatetime(LocalDateTime updateDatetime) {
 		this.updateDatetime = updateDatetime;
+	}
+
+	public String getApplicationlNo() {
+		return applicationlNo;
+	}
+
+	public void setApplicationlNo(String applicationlNo) {
+		this.applicationlNo = applicationlNo;
 	}
 	
 }

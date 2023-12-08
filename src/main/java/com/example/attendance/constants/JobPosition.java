@@ -35,6 +35,6 @@ public enum JobPosition {
 		return 0;
 	}
 	
-	private static int reviewPermission = 20;
+	private static int reviewPermission = 20;////////
 	
 }

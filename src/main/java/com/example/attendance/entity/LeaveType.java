@@ -16,4 +16,9 @@ public class LeaveType {
 	@Column(name = "name")
 	private String name;
 
+	public static Object parser(String employeeDepartment) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
